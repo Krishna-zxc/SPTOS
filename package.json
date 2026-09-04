@@ -1,0 +1,30 @@
+{
+  "name": "sptos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Smart Public Transport Optimization System (SPTOS) — software-only live bus tracking, arrival estimates and demand analytics.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "shared",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web -c blue,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:web": "npm --workspace web run dev",
+    "migrate": "npm --workspace server run migrate",
+    "seed": "npm --workspace server run seed",
+    "reset": "npm --workspace server run reset",
+    "test": "npm --workspace server test",
+    "build": "npm --workspace web run build",
+    "start": "npm --workspace server start"
+  },
+  "devDependencies": {
+    "concurrently": "10.0.5"
+  }
+}

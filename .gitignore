@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build output
+dist/
+build/
+web/dev-dist/
+
+# local database (PGlite dev fallback)
+server/.pgdata/
+
+# environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+logs/
+
+# editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# test / coverage
+coverage/

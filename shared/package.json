@@ -1,0 +1,11 @@
+{
+  "name": "@sptos/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Domain vocabulary shared by the SPTOS server and web clients.",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  }
+}
