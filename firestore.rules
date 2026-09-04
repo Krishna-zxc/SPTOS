@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: is the request from a signed-in user?
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // ── Routes & Stops (Publicly accessible) ──
+    match /routes/{docId} {
+      allow read, write: if true;
+    }
+
+    match /stops/{docId} {
+      allow read, write: if true;
+    }
+
+    // ── User Profiles ──
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // ── Trips & Driver Check-ins ──
+    match /trips/{docId} {
+      allow read, write: if true;
+    }
+
+    match /checkins/{docId} {
+      allow read, write: if true;
+    }
+
+    // ── Issues / Reports ──
+    match /issues/{docId} {
+      allow read, write: if true;
+    }
+
+    // ── Favourites & Alerts ──
+    match /favourites/{docId} {
+      allow read, write: if true;
+    }
+
+    match /alerts/{docId} {
+      allow read, write: if true;
+    }
+
+    // Default fallback
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

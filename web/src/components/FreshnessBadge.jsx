@@ -22,7 +22,7 @@ export function FreshnessBadge({ state, className = '', showDot = true }) {
 
   return (
     <span
-      className={`pill ${tone} ${className}`}
+      className={`pill ${tone} ${className} transition-colors duration-300`}
       title={
         fresh.updatedAt
           ? `Last driver check-in at ${new Date(fresh.updatedAt).toLocaleTimeString()}`
@@ -32,8 +32,14 @@ export function FreshnessBadge({ state, className = '', showDot = true }) {
       {showDot ? (
         <span
           aria-hidden="true"
+          // The ring only beats while the data is fresh: a still dot is the
+          // stale state, so the missing movement is itself the signal.
           className={`size-1.5 rounded-full ${
-            fresh.isStale ? 'bg-warn' : 'bg-good animate-pulse'
+            !fresh.hasData
+              ? 'bg-mute'
+              : fresh.isStale
+                ? 'bg-warn'
+                : 'live-dot bg-good text-good'
           }`}
         />
       ) : null}

@@ -87,7 +87,7 @@ export function RouteMap({
   stops = [],
   trips = [],
   highlightStopId = null,
-  height = '22rem',
+  height = null,
   className = '',
 }) {
   const { staleAfterSeconds } = useMeta();
@@ -98,11 +98,13 @@ export function RouteMap({
     [stops],
   );
 
+  const containerHeightClass = height ? '' : 'h-60 sm:h-72 md:h-80';
+
   if (stops.length === 0) {
     return (
       <div
-        className={`card grid place-items-center text-sm text-slate-500 ${className}`}
-        style={{ height }}
+        className={`card grid place-items-center text-sm text-slate-500 ${containerHeightClass} ${className}`}
+        style={height ? { height } : undefined}
       >
         This route has no stops on the map yet.
       </div>
@@ -110,7 +112,10 @@ export function RouteMap({
   }
 
   return (
-    <div className={`card overflow-hidden ${className}`} style={{ height }}>
+    <div
+      className={`card overflow-hidden ${containerHeightClass} ${className}`}
+      style={height ? { height } : undefined}
+    >
       <MapContainer
         style={{ height: '100%', width: '100%' }}
         center={line[0]}

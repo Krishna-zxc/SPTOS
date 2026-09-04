@@ -17,6 +17,20 @@ server/.pgdata/
 .env.*.local
 !.env.example
 
+# firebase — local deploy cache, emulator data, debug logs
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+database-debug.log*
+
+# firebase auth/user exports (contain password hashes and PII)
+auth-export.json
+*-export.json
+
+# local editor / agent tooling
+.claude/
+
 # logs
 *.log
 npm-debug.log*

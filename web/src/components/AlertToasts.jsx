@@ -57,7 +57,8 @@ export function AlertToasts() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-2 z-[1000] flex flex-col items-center gap-2 px-3"
+      className="pointer-events-none fixed inset-x-0 z-[1000] flex flex-col items-center gap-2 px-3"
+      style={{ top: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
       role="region"
       aria-label="Arrival alerts"
     >
@@ -65,7 +66,7 @@ export function AlertToasts() {
         <div
           key={`${alert.subscriptionId}-${alert.tripId}`}
           role="alert"
-          className="card pointer-events-auto w-full max-w-md border-brand-200 bg-brand-50 p-3 shadow-lg"
+          className="card animate-toast-in pointer-events-auto w-full max-w-md border-brand-200 bg-brand-50 p-3 shadow-lg"
         >
           <div className="flex items-start gap-3">
             <span className="rounded-lg bg-brand-700 px-2 py-0.5 text-sm font-bold text-white">
@@ -89,12 +90,22 @@ export function AlertToasts() {
             <button
               type="button"
               aria-label="Dismiss alert"
-              className="rounded-lg px-2 py-1 text-brand-900/60 hover:bg-brand-100"
+              className="rounded-lg px-2 py-1 text-brand-900/60 transition-colors hover:bg-brand-100 hover:text-brand-900 active:scale-90"
               onClick={() => dismiss(alert.tripId, alert.subscriptionId)}
             >
               ✕
             </button>
           </div>
+
+          {/*
+            A bar draining over the auto-dismiss window. The toast disappearing on
+            its own would otherwise look like a bug; this says it was on a timer.
+          */}
+          <span
+            aria-hidden="true"
+            className="mt-2 block h-0.5 origin-left rounded-full bg-brand-300"
+            style={{ animation: `grow-x ${DISMISS_AFTER_MS}ms linear reverse forwards` }}
+          />
         </div>
       ))}
     </div>
